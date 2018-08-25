@@ -1,29 +1,30 @@
-<mat-sidenav-container class="sidenav-container">
-    <mat-sidenav
-            #drawer
+<app-header [leftDrawer]="leftDrawer" [rightDrawer]="rightDrawer">angular6-ngrx-mat-bootstrap-seed</app-header>
+
+<mat-drawer-container class="sidenav-container">
+    <mat-drawer
+            #leftDrawer
             class="sidenav"
             position="start"
-            mode="over"
             fixedInViewport="true"
-            [attr.role]="'dialog'"
-            [opened]="false">
-        <!--[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"-->
+            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+            [mode]="(isHandset$ | async) ? 'over' : 'side'"
+            [opened]="!(isHandset$ | async)">
         <!--[mode]="(isHandset$ | async) ? 'over' : 'side'"-->
-        <!--[opened]="!(isHandset$ | async)">-->
+        <!--[attr.role]="'navigation'"-->
+        <!--[opened]="false">-->
         <app-left-sidenav></app-left-sidenav>
-    </mat-sidenav>
-    <mat-sidenav
+    </mat-drawer>
+    <mat-drawer
             #rightDrawer
             class="sidenav"
             position="end"
             mode="side"
             fixedInViewport="true"
-            [attr.role]="'navigation'"
+            [attr.role]="'dialog'"
             [opened]="false">
         <app-right-sidenav></app-right-sidenav>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <app-header [drawer]="drawer"></app-header>
+    </mat-drawer>
+    <mat-drawer-content>
         <!-- Add Content Here -->
         <router-outlet></router-outlet>
 
@@ -40,6 +41,6 @@
                 </div>
             </div>
         </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+    </mat-drawer-content>
+</mat-drawer-container>
 

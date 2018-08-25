@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppMaterialModule } from './app-material.module';
+import { MaterialModule } from './material/material.module';
 import { APP_SHARED_COMPONENTS } from './components';
 
 @NgModule( {
@@ -9,7 +9,7 @@ import { APP_SHARED_COMPONENTS } from './components';
   ],
   exports: [
     CommonModule,
-    AppMaterialModule,
+    MaterialModule,
     ...APP_SHARED_COMPONENTS
   ]
 

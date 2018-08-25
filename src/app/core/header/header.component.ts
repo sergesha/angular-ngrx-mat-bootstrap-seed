@@ -10,15 +10,22 @@ import { map } from 'rxjs/operators';
 } )
 export class HeaderComponent {
 
-    @Input() drawer;
-    @Input() showButton = true;
+    @Input() leftDrawer;
+    @Input() rightDrawer;
 
-    isHandset$: Observable<boolean> = this.breakpointObserver.observe( Breakpoints.Handset )
-        .pipe(
-            map( result => result.matches )
-        );
-
-    constructor( private breakpointObserver: BreakpointObserver ) {
+    toggleLeftDrawer () {
+        this.leftDrawer.toggle && this.leftDrawer.toggle();
     }
+
+    toggleRightDrawer () {
+        this.rightDrawer.toggle && this.rightDrawer.toggle();
+    }
+    // isHandset$: Observable<boolean> = this.breakpointObserver.observe( Breakpoints.Handset )
+    //     .pipe(
+    //         map( result => result.matches )
+    //     );
+    //
+    // constructor( private breakpointObserver: BreakpointObserver ) {
+    // }
 
 }

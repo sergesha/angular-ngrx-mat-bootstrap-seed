@@ -22,5 +22,5 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatListModule
   ]
 } )
-export class AppMaterialModule {
+export class MaterialModule {
 }

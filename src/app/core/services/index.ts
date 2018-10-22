@@ -1,6 +1,6 @@
-// import { CoreServiceName } from './core-service-name.service';
-// export { CoreServiceName } from './core-service-name.service';
+import { FirestoreService } from "./firestore/firestore.service";
+export { FirestoreService } from "./firestore/firestore.service";
 
 export const APP_CORE_SERVICES = [
-//    CoreServiceName
+   FirestoreService
 ];

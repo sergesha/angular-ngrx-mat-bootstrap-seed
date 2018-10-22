@@ -2,26 +2,26 @@
 
 <mat-drawer-container class="sidenav-container">
     <mat-drawer
-            #leftDrawer
-            class="sidenav"
-            position="start"
-            fixedInViewport="true"
-            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-            [mode]="(isHandset$ | async) ? 'over' : 'side'"
-            [opened]="!(isHandset$ | async)">
+        #leftDrawer
+        class="sidenav"
+        position="start"
+        fixedInViewport="true"
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="!(isHandset$ | async)">
         <!--[mode]="(isHandset$ | async) ? 'over' : 'side'"-->
         <!--[attr.role]="'navigation'"-->
         <!--[opened]="false">-->
         <app-left-sidenav></app-left-sidenav>
     </mat-drawer>
     <mat-drawer
-            #rightDrawer
-            class="sidenav"
-            position="end"
-            mode="side"
-            fixedInViewport="true"
-            [attr.role]="'dialog'"
-            [opened]="false">
+        #rightDrawer
+        class="sidenav"
+        position="end"
+        mode="side"
+        fixedInViewport="true"
+        [attr.role]="'dialog'"
+        [opened]="false">
         <app-right-sidenav></app-right-sidenav>
     </mat-drawer>
     <mat-drawer-content>
@@ -35,6 +35,11 @@
                         <h1 class="mt-5">
                             Welcome to {{ title }}!
                         </h1>
+                        <h2>{{auth.currentUserDisplayName}}</h2>
+                        <h3>{{items | async}}</h3>
+                        <h3>{{itemsWithIds | async}}</h3>
+                        <button class="btn btn-primary" (click)="login()">Login</button>
+                        <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
                         <img width="250" alt="Angular Logo"
                              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
                     </div>

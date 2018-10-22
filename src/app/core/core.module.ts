@@ -1,10 +1,11 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
-import { APP_CORE_SERVICES } from './services';
+import { AuthModule } from "@app/core/auth/auth.module";
+import { SharedModule } from "@app/shared/shared.module";
+import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { LeftSidenavComponent } from './left-sidenav/left-sidenav.component';
 import { RightSidenavComponent } from './right-sidenav/right-sidenav.component';
-import { FooterComponent } from './footer/footer.component';
+import { APP_CORE_SERVICES } from './services';
 
 const APP_CORE_COMPONENTS = [
     HeaderComponent,
@@ -13,9 +14,10 @@ const APP_CORE_COMPONENTS = [
     FooterComponent
 ];
 
-@NgModule( {
+@NgModule({
     imports: [
-        SharedModule
+        SharedModule,
+        AuthModule
     ],
     declarations: [
         ...APP_CORE_COMPONENTS
@@ -25,15 +27,15 @@ const APP_CORE_COMPONENTS = [
     ],
     exports: [
         // AppRoutingModule,
-        ...APP_CORE_COMPONENTS,
-        ...APP_CORE_SERVICES
+        ...APP_CORE_COMPONENTS
+        // ...APP_CORE_SERVICES,
     ]
-} )
+})
 export class CoreModule {
-    constructor( @Optional() @SkipSelf() parentModule: CoreModule ) {
+    constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
         if (parentModule) {
             throw new Error(
-                'CoreModule is already loaded. Import it in the AppModule only' );
+                'CoreModule is already loaded. Import it in the AppModule only');
         }
     }
 }

@@ -1,8 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "@app/core/auth/auth.service";
-import { FirestoreService } from "@app/core/services";
-import { APP_HELPERS } from "@app/shared/helpers";
+import { FirestoreAdapterService } from "@app/core/services";
+import { User } from "@app/models/user.model";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,16 +22,18 @@ export class AppComponent implements OnInit {
 
     items: Observable<any[]>;
     itemsWithIds: Observable<any[]>;
+    auth;
 
     constructor(private breakpointObserver: BreakpointObserver,
-                protected auth: AuthService,
-                private db: FirestoreService) {
+                private authService: AuthService,
+                private db: FirestoreAdapterService) {
     }
 
     ngOnInit() {
-        this.items = this.db.col$('users');
+        this.auth = this.authService;
+        this.items =this.db.col$('users', ref => ref.where('displayName', '==', 'Serge S.'))
+        // this.items = this.db.col$('users');
         this.items.subscribe(users => console.log("Users", users));
-        // this.items =this.db.col$('users', ref => ref.where('title', '==', 'Item 3'))
         this.itemsWithIds = this.db.colWithIds$('users');
         this.itemsWithIds.subscribe(users => console.log("WithIds", users));
     }

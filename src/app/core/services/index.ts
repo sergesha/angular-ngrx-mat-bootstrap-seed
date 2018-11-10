@@ -1,6 +1,6 @@
-import { FirestoreService } from "./firestore/firestore.service";
-export { FirestoreService } from "./firestore/firestore.service";
+import { FirestoreAdapterService } from "./firestore/firestore-adapter.service";
+export { FirestoreAdapterService } from "./firestore/firestore-adapter.service";
 
 export const APP_CORE_SERVICES = [
-   FirestoreService
+   FirestoreAdapterService
 ];

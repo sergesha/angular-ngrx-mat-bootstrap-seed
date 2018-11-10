@@ -11,8 +11,7 @@ type DocPredicate<T> = string | AngularFirestoreDocument<T>;
 @Injectable({
     providedIn: 'root'
 })
-export class FirestoreService {
-
+export class FirestoreAdapterService {
     constructor(private afs: AngularFirestore) {
     }
 
@@ -56,12 +55,12 @@ export class FirestoreService {
                         return { id, ...data };
                     })
                     // convert [] to {}
-                    .reduce((a, v) => {
-                        a[v.id] = v;
-                        return a;
-                    }, {})
-                // or it's shorter version:
-                // .reduce((a, v) => (a[v.id] = v) && a, {})
+                    // .reduce((a, v) => {
+                    //     a[v.id] = v;
+                    //     return a;
+                    // }, {})
+                    // or it's shorter version:
+                    // .reduce((a, v) => (a[v.id] = v) && a, {})
             )
         )
     }

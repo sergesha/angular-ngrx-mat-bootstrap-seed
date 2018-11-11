@@ -44,8 +44,8 @@ export const pluralNames = { Hero: 'heroes' };
 // export class EntityStoreModule {}
 export class EntityStoreModule {
     constructor(entityDataService: EntityDataService,
-                @Inject('UserDataService') userService: any,
-                @Inject('HeroDataService') heroService: any) {
+                @Inject('UserDataService') userService: FirestoreDataService<User>,
+                @Inject('HeroDataService') heroService: FirestoreDataService<Hero>) {
         entityDataService.registerService('User', userService.config('users'));
         entityDataService.registerService('Hero', heroService.config('heroes'));
     }

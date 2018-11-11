@@ -1,5 +1,17 @@
-export class Hero {
-    id?: string;
+export interface IHero {
+    id: string | any;
+    name: string | any;
+    desc?: string | any;
+}
+
+export class Hero implements IHero {
+    id: string;
     name: string;
     desc?: string;
+    constructor(config: IHero) {
+        const { id, name, desc } = config;
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+    }
 }

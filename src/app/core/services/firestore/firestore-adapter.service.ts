@@ -24,7 +24,7 @@ export class FirestoreAdapterService {
     }
 
     // firebase serve timestamp
-    get timestamp() {
+    private get timestamp() {
         return firestore.FieldValue.serverTimestamp()
     }
 

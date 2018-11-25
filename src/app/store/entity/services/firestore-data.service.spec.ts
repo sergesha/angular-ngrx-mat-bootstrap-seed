@@ -6,7 +6,7 @@ describe('FirestoreDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FirestoreDataService = TestBed.get(FirestoreDataService);
+    const service: FirestoreDataService<any> = TestBed.get(FirestoreDataService);
     expect(service).toBeTruthy();
   });
 });

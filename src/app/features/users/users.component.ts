@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreAdapterService } from "@app/core/services";
 import { Hero, IHero } from "@app/models/hero.model";
 import { User } from "@app/models/user.model";
 import { EntityCollectionService, EntityServices } from "ngrx-data";
@@ -15,9 +14,9 @@ export class UsersComponent implements OnInit {
     userService: EntityCollectionService<User>;
     heroService: EntityCollectionService<Hero>;
 
-    constructor(entityServices: EntityServices, private fas: FirestoreAdapterService) {
-        this.userService = entityServices.getEntityCollectionService('User');
-        this.heroService = entityServices.getEntityCollectionService('Hero');
+    constructor(entityServices: EntityServices) {
+        this.userService = entityServices.getEntityCollectionService<User>('User');
+        this.heroService = entityServices.getEntityCollectionService<Hero>('Hero');
     }
 
     ngOnInit() {

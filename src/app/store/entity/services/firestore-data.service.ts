@@ -10,15 +10,15 @@ interface EntityBaseModel {
 
 @Injectable()
 export class FirestoreDataService<T extends EntityBaseModel> implements EntityCollectionDataService<T> {
-    name: string;
-    private colName: string;
+    name;
+    protected collection;
 
-    constructor(private db: FirestoreAdapterService) {
-        this.name = 'Firestore Custom Data Service';
+    constructor(private readonly db: FirestoreAdapterService) {
     }
 
-    config(colName: string) {
-        this.colName = colName;
+    config(config: { collectionName: string }): FirestoreDataService<T> {
+        this.collection = config.collectionName;
+        this.name = `[${config.collectionName.toUpperCase()}] Firestore Data Service`;
         return this;
     }
 
@@ -81,15 +81,37 @@ export class FirestoreDataService<T extends EntityBaseModel> implements EntityCo
         switch (typeof param) {
             case 'number':
             case 'string':
-                path = `${this.colName}/${param}`;
+                path = `${this.collection}/${param}`;
                 break;
             case 'undefined':
-                path = this.colName;
+                path = this.collection;
                 break;
             default:
-                path = param['id'] ? `${this.colName}/${param['id']}` : this.colName;
+                path = param['id'] ? `${this.collection}/${param['id']}` : this.collection;
         }
         return path;
     }
 }
+
+// FirestoreDataConfig Decorator
+export const FirestoreDataConfig = (config: { collectionName: string }) =>
+    function <U extends EntityBaseModel, T extends { new(...args: any[]): FirestoreDataService<U> }>(target: T): T {
+        Object.defineProperties(
+            target.prototype, {
+                collection: {
+                    value: config.collectionName,
+                    writable: true
+                },
+                name: {
+                    value: `[${config.collectionName.toUpperCase()}] Firestore Data Service`,
+                    writable: true
+                }
+            }
+        );
+        return target;
+        // return class CustomFirestoreDataService extends target {
+        //     collection = config.collectionName;
+        //     name = `[${config.collectionName}] Firestore Data Service`;
+        // }
+    };
 

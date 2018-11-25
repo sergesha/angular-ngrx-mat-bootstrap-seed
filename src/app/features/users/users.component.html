@@ -1,6 +1,15 @@
 <p>
     heroes works!
 </p>
-<p>
-    {{users$ | async}}
-</p>
+<table>
+    <thead>
+    <th>Name</th>
+    <th>e-Mail</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of (users$ | async)">
+        <td>{{user.displayName}}</td>
+        <td>{{user.email}}</td>
+    </tr>
+    </tbody>
+</table>

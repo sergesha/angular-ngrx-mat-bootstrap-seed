@@ -1,6 +1,6 @@
-// import { SharedComponentName } from './shared-component-name.component';
-// export { SharedComponentName } from './shared-component-name.component';
+import { TableViewComponent } from "@app/shared/components/table-view/table-view.component";
+export { TableViewComponent } from "@app/shared/components/table-view/table-view.component";
 
 export const APP_SHARED_COMPONENTS = [
-    // SharedComponentName
+    TableViewComponent
 ];

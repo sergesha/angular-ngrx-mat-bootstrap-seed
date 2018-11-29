@@ -11,6 +11,7 @@ import { Observable } from "rxjs";
 })
 export class UsersComponent implements OnInit {
     users$: Observable<User[]>;
+    heroes$: Observable<Hero[]>;
     userService: EntityCollectionService<User>;
     heroService: EntityCollectionService<Hero>;
 
@@ -21,6 +22,7 @@ export class UsersComponent implements OnInit {
 
     ngOnInit() {
         this.users$ = this.userService.entities$;
+        this.heroes$ = this.heroService.entities$;
         this.getUsers();
 
         const hero1: Hero = new Hero(<IHero>{

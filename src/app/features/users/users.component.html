@@ -1,6 +1,8 @@
 <p>
     heroes works!
 </p>
+<app-table-view [dataSource$]="users$" [pageSize]="1" [displayedColumns]="{displayName: 'Name', email: 'e-Mail', uid: 'Id'}"></app-table-view>
+<app-table-view [dataSource$]="heroes$" [pageSize]="2" [displayedColumns]="{id: 'Id', name: 'Name', desc: 'Description'}"></app-table-view>
 <table>
     <thead>
     <th>Name</th>

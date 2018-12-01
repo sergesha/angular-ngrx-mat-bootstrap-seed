@@ -1,5 +1,5 @@
-import { OperatorFunction } from "rxjs";
-import { tap } from "rxjs/operators";
+import { OperatorFunction } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 function pipeLog<T>(message?: string): OperatorFunction<T, T> {
     return tap(e => console.log(message, e));

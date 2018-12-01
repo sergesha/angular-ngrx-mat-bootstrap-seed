@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from "@app/shared/shared.module";
+import { SharedModule } from '@app/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { FeatureOneEffects } from './feature-one/store/feature-one.effects';

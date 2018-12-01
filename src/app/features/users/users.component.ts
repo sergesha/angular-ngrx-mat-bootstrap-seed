@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero, IHero } from "@app/models/hero.model";
-import { User } from "@app/models/user.model";
-import { EntityCollectionService, EntityServices } from "ngrx-data";
-import { Observable } from "rxjs";
+import { Hero, IHero } from '@app/models/hero.model';
+import { User } from '@app/models/user.model';
+import { EntityCollectionService, EntityServices } from 'ngrx-data';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-users',

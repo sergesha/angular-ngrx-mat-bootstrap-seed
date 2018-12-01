@@ -1,25 +1,25 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { FeatureOneEffects } from './feature-one.effects';
 
 describe('FeatureOneEffects', () => {
-  let actions$: Observable<any>;
-  let effects: FeatureOneEffects;
+    const actions$: Observable<any> = of('');
+    let effects: FeatureOneEffects;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        FeatureOneEffects,
-        provideMockActions(() => actions$)
-      ]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [
+                FeatureOneEffects,
+                provideMockActions(() => actions$)
+            ]
+        });
+
+        effects = TestBed.get(FeatureOneEffects);
     });
 
-    effects = TestBed.get(FeatureOneEffects);
-  });
-
-  it('should be created', () => {
-    expect(effects).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(effects).toBeTruthy();
+    });
 });

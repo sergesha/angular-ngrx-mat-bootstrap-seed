@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-table-view',

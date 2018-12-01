@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { HeroDataService } from "@app/store/entity/services/hero-data.service";
-import { UserDataService } from "@app/store/entity/services/user-data.service";
+import { HeroDataService } from '@app/store/entity/services/hero-data.service';
+import { UserDataService } from '@app/store/entity/services/user-data.service';
 import { EntityDataService, EntityMetadataMap, NgrxDataModule } from 'ngrx-data';
 
 // firebase-functions-helper

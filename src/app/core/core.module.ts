@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { AuthModule } from "@app/core/auth/auth.module";
-import { SharedModule } from "@app/shared/shared.module";
+import { AuthModule } from '@app/core/auth/auth.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { LeftSidenavComponent } from './left-sidenav/left-sidenav.component';

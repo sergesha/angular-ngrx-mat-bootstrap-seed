@@ -1,15 +1,15 @@
-//import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 //
-//import { FirestoreAdapterService } from './firestore.service';
+// import { FirestoreAdapterService } from './firestore.service';
 //
-//describe('FirestoreAdapterService', () => {
+// describe('FirestoreAdapterService', () => {
 //  beforeEach(() => TestBed.configureTestingModule({}));
 //
 //  it('should be created', () => {
 //    const service: FirestoreAdapterService = TestBed.get(FirestoreAdapterService);
 //    expect(service).toBeTruthy();
 //  });
-//});
+// });
 
 
 import { TestBed, inject } from '@angular/core/testing';

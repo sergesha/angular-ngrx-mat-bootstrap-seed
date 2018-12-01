@@ -7,10 +7,10 @@ import {
     DocumentChangeAction,
     DocumentSnapshotDoesNotExist,
     DocumentSnapshotExists
-} from "@angular/fire/firestore";
-import { firestore } from "firebase/app";
-import { Observable } from "rxjs";
-import { map, take, tap } from "rxjs/operators";
+} from '@angular/fire/firestore';
+import { firestore } from 'firebase/app';
+import { Observable } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 
 // The T is a Typescript generic that allows us to use our custom interfaces
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
@@ -25,7 +25,7 @@ export class FirestoreAdapterService {
 
     // firebase serve timestamp
     private get timestamp() {
-        return firestore.FieldValue.serverTimestamp()
+        return firestore.FieldValue.serverTimestamp();
     }
 
     // Methods wraps the afsdoc and collection, so the service can be used as a drop and replacement for AngularFirestore
@@ -43,14 +43,14 @@ export class FirestoreAdapterService {
     doc$<T>(ref: DocPredicate<T>): Observable<T> {
         return this.doc(ref).snapshotChanges().pipe(
             map(doc => doc.payload.data() as T)
-        )
+        );
     }
 
     // return the collection array
     col$<T>(ref: CollectionPredicate<T>, queryFn?): Observable<T[]> {
         return this.col(ref, queryFn).snapshotChanges().pipe(
             map(docs => docs.map(a => a.payload.doc.data()) as T[])
-        )
+        );
     }
 
     // return the collection object with the ids
@@ -70,7 +70,7 @@ export class FirestoreAdapterService {
                 // or it's shorter version:
                 // .reduce((a, v) => (a[v.id] = v) && a, {})
             )
-        )
+        );
     }
 
     inspectDoc(ref: DocPredicate<any>): void {

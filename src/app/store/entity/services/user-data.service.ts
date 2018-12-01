@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from "@app/models/user.model";
-import { FirestoreDataConfig, FirestoreDataService } from "@app/store/entity/services/firestore-data.service";
+import { User } from '@app/models/user.model';
+import { FirestoreDataConfig, FirestoreDataService } from '@app/store/entity/services/firestore-data.service';
 
 @Injectable()
 @FirestoreDataConfig({

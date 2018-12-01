@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { FirestoreAdapterService } from "@app/core/services";
-import { EntityCollectionDataService, QueryParams, Update } from "ngrx-data";
-import { from, Observable, of } from "rxjs";
-import { flatMap } from "rxjs/operators";
+import { FirestoreAdapterService } from '@app/core/services';
+import { EntityCollectionDataService, QueryParams, Update } from 'ngrx-data';
+import { from, Observable, of } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 
 interface EntityBaseModel {
     id?: number | string;
@@ -94,8 +94,8 @@ export class FirestoreDataService<T extends EntityBaseModel> implements EntityCo
 }
 
 // FirestoreDataConfig Decorator
-export const FirestoreDataConfig = (config: { collectionName: string }) =>
-    function <U extends EntityBaseModel, T extends { new(...args: any[]): FirestoreDataService<U> }>(target: T): T {
+export function FirestoreDataConfig(config: { collectionName: string }) {
+    return function <U extends EntityBaseModel, T extends { new(...args: any[]): FirestoreDataService<U> }>(target: T): T {
         Object.defineProperties(
             target.prototype, {
                 collection: {
@@ -114,4 +114,5 @@ export const FirestoreDataConfig = (config: { collectionName: string }) =>
         //     name = `[${config.collectionName}] Firestore Data Service`;
         // }
     };
+}
 

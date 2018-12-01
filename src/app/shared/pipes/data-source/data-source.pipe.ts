@@ -1,6 +1,6 @@
-import { DataSource } from "@angular/cdk/table";
+import { DataSource } from '@angular/cdk/table';
 import { Pipe, PipeTransform } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 @Pipe({
     name: 'dataSource'

@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * 'valuesOf' pipe returns values of object
+ */
 @Pipe({
   name: 'valuesOf'
 })

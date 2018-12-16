@@ -2,6 +2,9 @@ import { DataSource } from '@angular/cdk/table';
 import { Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
 
+/**
+ * 'dataSource' pipe converts Observable stream to DataSource (for mat table)
+ */
 @Pipe({
     name: 'dataSource'
 })

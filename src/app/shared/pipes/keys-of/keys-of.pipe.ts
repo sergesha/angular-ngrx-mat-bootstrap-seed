@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * 'keysOf' pipe returns keys of object
+ */
 @Pipe({
   name: 'keysOf'
 })

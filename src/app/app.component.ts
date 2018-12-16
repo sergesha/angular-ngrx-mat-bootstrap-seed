@@ -1,13 +1,14 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@app/core/auth/auth.service';
-import { Auth } from '@app/core/auth/store/auth.model';
+import { FirebaseAuthService } from '@app/core/auth/services/firebase-auth.service';
+import { AuthState } from '@app/core/auth/store/auth-state.model';
+import * as fromAuth from '@app/core/auth/store/auth.actions';
+import { authSelectors } from '@app/core/auth/store/auth.selectors';
 import { FirestoreAdapterService } from '@app/core/services';
 import { AppState } from '@app/store/app.reducer';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as fromAuth from '@app/core/auth/store/auth.actions';
 
 @Component({
     selector: 'app-root',
@@ -26,10 +27,11 @@ export class AppComponent implements OnInit {
     items: Observable<any[]>;
     itemsWithIds: Observable<any[]>;
     auth;
-    auth$: Observable<Auth>;
+    auth$: Observable<AuthState>;
+    user;
 
     constructor(private breakpointObserver: BreakpointObserver,
-                private authService: AuthService,
+                private authService: FirebaseAuthService,
                 private db: FirestoreAdapterService,
                 private store: Store<AppState>) {
     }
@@ -42,7 +44,7 @@ export class AppComponent implements OnInit {
         this.itemsWithIds.subscribe(users => console.log('WithIds', users));
 
         this.auth$ = this.store.select('auth');
-        this.store.dispatch(new fromAuth.GetUser());
+        this.user = this.store.pipe(select(authSelectors.userInfo));
     }
 
     login() {

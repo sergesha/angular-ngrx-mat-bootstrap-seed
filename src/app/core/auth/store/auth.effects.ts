@@ -1,69 +1,48 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '@app/core/auth/auth.service';
+import { FirebaseAuthService } from '@app/core/auth/services/firebase-auth.service';
 import * as fromAuth from '@app/core/auth/store/auth.actions';
+import { UserModel } from '@app/models/user.model';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { delay, map, switchMap } from 'rxjs/operators';
-
+import { defer, Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthEffects {
     @Effect()
-    getUser: Observable<Action> = this.actions$.pipe(
-        ofType(fromAuth.AuthActionTypes.GET_USER),
-        map((action: fromAuth.GetUser) => action.payload),
-        switchMap(payload => of(this.authService.currentUser)),
-        delay(2000), // delay to show loading spinner, delete me!
-        map(authState => {
-            if (authState) {
-                /// User logged in
-                // const user = new User(authState.uid, authState.displayName);
-                return new fromAuth.Authenticated(authState);
-            } else {
-                /// User not logged in
-                return new fromAuth.NotAuthenticated();
-            }
+    init$ = defer((): Observable<Action> => {
+        return this.authService.currentUser$.pipe(
+            map((currentUser: UserModel) => {
+                if (currentUser) {
+                    /// User logged in
+                    return new fromAuth.LoggedIn({ user: currentUser });
+                } else {
+                    /// User not logged in
+                    return new fromAuth.LoggedOut();
+                }
+            })
+        );
+    });
 
+    @Effect({ dispatch: false })
+    googleLogin$: Observable<Action> | void = this.actions$.pipe(
+        ofType<fromAuth.GoogleLogin>(fromAuth.AuthActionTypes.GoogleLogin),
+        tap(() => {
+            this.authService.googleLogin();
         }),
-        // TODO: ErrorHandler / handleError() - разобраться как использовать
-        // catch(err =>  Observable.of(new AuthError()) )
+        catchError(error => of(new fromAuth.AuthError({ error: error })))
     );
-    @Effect()
-    login: Observable<Action> = this.actions$.pipe(
-        ofType(fromAuth.AuthActionTypes.GOOGLE_LOGIN),
-        map((action: fromAuth.GoogleLogin) => action.payload),
-        switchMap(payload => {
-            return this.authService.googleLogin();
-            // return Observable.fromPromise(this.googleLogin());
-        }),
-        map(credential => {
-            // successful login
-            return new fromAuth.GetUser();
-        }),
-        // catch(err => {
-        //     return Observable.of(new AuthError({error: err.message}));
-        // })
-    );
-    @Effect()
-    logout: Observable<Action> = this.actions$.pipe(
-        ofType(fromAuth.AuthActionTypes.LOGOUT),
-        map((action: fromAuth.Logout) => action.payload),
-        switchMap(payload => {
+
+    @Effect({ dispatch: false })
+    logout$: Observable<Action> | void = this.actions$.pipe(
+        ofType<fromAuth.Logout>(fromAuth.AuthActionTypes.Logout),
+        // map((action: fromAuth.Logout) => action.payload),
+        tap(() => {
             this.authService.signOut();
-            return of(null);
         }),
-        map(authData => {
-            return new fromAuth.NotAuthenticated();
-        })
-        // .catch(err => Observable.of(new AuthError({error: err.message})) )
+        catchError(error => of(new fromAuth.AuthError({ error: error })))
     );
 
-    constructor(private actions$: Actions, private authService: AuthService) {
+    constructor(private actions$: Actions, private authService: FirebaseAuthService) {
     }
-
-    // private googleLogin(): firebase.Promise<any> {
-    //     const provider = new firebase.auth.GoogleAuthProvider();
-    //     return this.afAuth.auth.signInWithPopup(provider);
-    // }
 }

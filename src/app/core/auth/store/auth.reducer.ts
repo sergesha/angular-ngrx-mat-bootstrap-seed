@@ -1,27 +1,14 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AuthState } from './auth-state.model';
 import { AuthActions, AuthActionTypes } from './auth.actions';
-import { Auth } from './auth.model';
 
-// export interface State extends EntityState<Auth> {
-//     // additional entities state properties
-//     loading?: boolean;
-// }
-// export const adapter: EntityAdapter<Auth> = createEntityAdapter<Auth>({
-//     selectId: (auth: Auth) => auth.uid
-// });
-// export const initialState: State = adapter.getInitialState({
-//     // additional entity state properties
-//     uid: null,
-//     // displayName: 'GUEST',
-//     loading: false
-// });
-
-export const initialState: Auth = {
-    uid: null,
-    displayName: 'Unauthorized User',
-    email: '',
-    photoURL: '',
+export const initialState: AuthState = {
+    loggedIn: false,
+    user: {
+        uid: null,
+        displayName: null,
+        email: null,
+        photoURL: null
+    },
     loading: false,
     error: ''
 };
@@ -29,73 +16,45 @@ export const initialState: Auth = {
 export function reducer(
     state = initialState,
     action: AuthActions
-): Auth {
+): AuthState {
     switch (action.type) {
-        case AuthActionTypes.GET_USER: {
-            return { ...state, loading: true };
+        case AuthActionTypes.LoggedIn: {
+            return {
+                ...state,
+                loggedIn: !!action.payload.user && !!action.payload.user.uid,
+                user: action.payload.user || null,
+                loading: false
+            };
         }
 
-        case AuthActionTypes.AUTHENTICATED: {
-            return { ...state, ...action.payload, loading: false };
+        case AuthActionTypes.LoggedOut: {
+            return {
+                ...state,
+                ...initialState
+            };
         }
 
-        case AuthActionTypes.NOT_AUTHENTICATED: {
-            return { ...state, ...initialState, loading: false };
+        case AuthActionTypes.GoogleLogin: {
+            return {
+                ...state,
+                loading: true
+            };
         }
 
-        case AuthActionTypes.GOOGLE_LOGIN: {
-            return { ...state, loading: true };
+        case AuthActionTypes.Logout: {
+            return {
+                ...state,
+                loading: true
+            };
         }
 
-        case AuthActionTypes.AUTH_ERROR: {
-            return { ...state, ...action.payload, loading: false };
+        case AuthActionTypes.AuthError: {
+            return {
+                ...state,
+                error: action.payload.error,
+                loading: false
+            };
         }
-
-        case AuthActionTypes.LOGOUT: {
-            return { ...state, loading: true };
-        }
-
-// ----
-
-        // case AuthActionTypes.AddFeatureOne: {
-        //     return adapter.addOne(action.payload.featureOne, state);
-        // }
-        //
-        // case AuthActionTypes.UpsertFeatureOne: {
-        //     return adapter.upsertOne(action.payload.featureOne, state);
-        // }
-        //
-        // case AuthActionTypes.AddFeatureOnes: {
-        //     return adapter.addMany(action.payload.featureOnes, state);
-        // }
-        //
-        // case AuthActionTypes.UpsertFeatureOnes: {
-        //     return adapter.upsertMany(action.payload.featureOnes, state);
-        // }
-        //
-        // case AuthActionTypes.UpdateFeatureOne: {
-        //     return adapter.updateOne(action.payload.featureOne, state);
-        // }
-        //
-        // case AuthActionTypes.UpdateFeatureOnes: {
-        //     return adapter.updateMany(action.payload.featureOnes, state);
-        // }
-        //
-        // case AuthActionTypes.DeleteFeatureOne: {
-        //     return adapter.removeOne(action.payload.id, state);
-        // }
-        //
-        // case AuthActionTypes.DeleteFeatureOnes: {
-        //     return adapter.removeMany(action.payload.ids, state);
-        // }
-        //
-        // case AuthActionTypes.LoadFeatureOnes: {
-        //     return adapter.addAll(action.payload.featureOnes, state);
-        // }
-        //
-        // case AuthActionTypes.ClearFeatureOnes: {
-        //     return adapter.removeAll(state);
-        // }
 
         default: {
             return state;
@@ -103,13 +62,3 @@ export function reducer(
     }
 }
 
-// export const {
-//     selectIds,
-//     selectEntities,
-//     selectAll,
-//     selectTotal,
-// } = adapter.getSelectors();
-
-export const selectAuthState = createFeatureSelector<Auth>('auth');
-export const getIsAuthenticated = createSelector(selectAuthState, (state: Auth) => state.uid !== null);
-export const getError = createSelector(selectAuthState, (state: Auth) => state.error);

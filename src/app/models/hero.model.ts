@@ -4,7 +4,7 @@ export interface IHero {
     desc?: string | any;
 }
 
-export class Hero implements IHero {
+export class HeroModel implements IHero {
     id: string;
     name: string;
     desc?: string;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero, IHero } from '@app/models/hero.model';
-import { User } from '@app/models/user.model';
+import { HeroModel, IHero } from '@app/models/hero.model';
+import { UserModel } from '@app/models/user.model';
 import { EntityCollectionService, EntityServices } from 'ngrx-data';
 import { Observable } from 'rxjs';
 
@@ -10,14 +10,14 @@ import { Observable } from 'rxjs';
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    users$: Observable<User[]>;
-    heroes$: Observable<Hero[]>;
-    userService: EntityCollectionService<User>;
-    heroService: EntityCollectionService<Hero>;
+    users$: Observable<UserModel[]>;
+    heroes$: Observable<HeroModel[]>;
+    userService: EntityCollectionService<UserModel>;
+    heroService: EntityCollectionService<HeroModel>;
 
     constructor(entityServices: EntityServices) {
-        this.userService = entityServices.getEntityCollectionService<User>('User');
-        this.heroService = entityServices.getEntityCollectionService<Hero>('Hero');
+        this.userService = entityServices.getEntityCollectionService<UserModel>('User');
+        this.heroService = entityServices.getEntityCollectionService<HeroModel>('Hero');
     }
 
     ngOnInit() {
@@ -25,13 +25,13 @@ export class UsersComponent implements OnInit {
         this.heroes$ = this.heroService.entities$;
         this.getUsers();
 
-        const hero1: Hero = new Hero(<IHero>{
+        const hero1: HeroModel = new HeroModel(<IHero>{
             id: 1,
-            name: 'Hero',
+            name: 'HeroModel',
             desc: 'The Hero'
         });
 
-        const hero2: Hero = new Hero(<IHero>{
+        const hero2: HeroModel = new HeroModel(<IHero>{
             id: 1,
             name: 'Hero 2',
             desc: 'The Hero 2'
@@ -60,15 +60,15 @@ export class UsersComponent implements OnInit {
         this.heroService.getAll();
     }
 
-    addUser(user: User) {
+    addUser(user: UserModel) {
         this.userService.add(user);
     }
 
-    deleteUser(user: User) {
+    deleteUser(user: UserModel) {
         this.userService.delete(user);
     }
 
-    updateUser(user: User) {
+    updateUser(user: UserModel) {
         this.userService.update(user);
     }
 }

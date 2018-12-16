@@ -1,6 +1,6 @@
 import { reducer, initialState } from './auth.reducer';
 
-describe('Auth Reducer', () => {
+describe('AuthState Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

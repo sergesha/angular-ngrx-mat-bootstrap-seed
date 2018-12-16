@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '@app/core/auth/auth.service';
+import { FirebaseAuthService } from '@app/core/auth/services/firebase-auth.service';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthEffects } from './store/auth.effects';
@@ -39,7 +39,7 @@ const firebaseConfig = {
         EffectsModule.forFeature([AuthEffects])
     ],
     providers: [
-        AuthService
+        FirebaseAuthService
     ]
 })
 export class AuthModule {

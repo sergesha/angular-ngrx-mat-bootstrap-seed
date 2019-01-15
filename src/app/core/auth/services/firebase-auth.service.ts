@@ -89,7 +89,7 @@ export class FirebaseAuthService {
     }
 
     signOut(path: string = '/') {
-        this.afAuth.auth.signOut().then(() => {
+        return this.afAuth.auth.signOut().then(() => {
             this.router.navigate([path]);
         });
     }

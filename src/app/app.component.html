@@ -36,8 +36,8 @@
                             Welcome to {{ title }}!
                         </h1>
                         <h2>{{(user | async).displayName}}</h2>
-                        <h3>{{items | async}}</h3>
-                        <h3>{{itemsWithIds | async}}</h3>
+                        <h3 *ngFor="let item of (items | async)">{{item.displayName}}</h3>
+                        <h3 *ngFor="let item of (itemsWithIds | async)">{{item.id}}</h3>
                         <button class="btn btn-primary" (click)="login()">Login</button>
                         <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
                         <img width="250" alt="Angular Logo"

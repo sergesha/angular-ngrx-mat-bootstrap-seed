@@ -13,13 +13,14 @@
 
 
 import { TestBed, inject } from '@angular/core/testing';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { FirestoreAdapterService } from './firestore-adapter.service';
 
 describe('FirestoreAdapterService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FirestoreAdapterService]
+      providers: [FirestoreAdapterService, AngularFirestore]
     });
   });
 

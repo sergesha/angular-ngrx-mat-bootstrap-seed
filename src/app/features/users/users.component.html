@@ -3,15 +3,4 @@
 </p>
 <app-table-view [dataSource$]="users$" [pageSize]="1" [displayedColumns]="{displayName: 'Name', email: 'e-Mail', uid: 'Id'}"></app-table-view>
 <app-table-view [dataSource$]="heroes$" [pageSize]="2" [displayedColumns]="{id: 'Id', name: 'Name', desc: 'Description'}"></app-table-view>
-<table>
-    <thead>
-    <th>Name</th>
-    <th>e-Mail</th>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of (users$ | async)">
-        <td>{{user.displayName}}</td>
-        <td>{{user.email}}</td>
-    </tr>
-    </tbody>
-</table>
+

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
+import { FeatureOneModule } from '@app/features/feature-one/feature-one.module';
+import { HomeComponent } from '@app/features/home/home.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { FeatureOneEffects } from './feature-one/store/feature-one.effects';
-import * as fromFeatureOne from './feature-one/store/feature-one.reducer';
 import { FeatureTwoEffects } from './feature-two/store/feature-two.effects';
 import * as fromFeatureTwo from './feature-two/store/feature-two.reducer';
 import { UsersComponent } from './users/users.component';
@@ -11,11 +11,11 @@ import { UsersComponent } from './users/users.component';
 @NgModule({
     imports: [
         SharedModule,
-        StoreModule.forFeature('featureOne', fromFeatureOne.reducer),
+        FeatureOneModule,
         StoreModule.forFeature('featureTwo', fromFeatureTwo.reducer),
-        EffectsModule.forFeature([FeatureOneEffects, FeatureTwoEffects])
+        EffectsModule.forFeature([FeatureTwoEffects])
     ],
-    declarations: [UsersComponent],
+    declarations: [HomeComponent, UsersComponent],
     exports: [UsersComponent],
     providers: []
 })

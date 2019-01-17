@@ -95,7 +95,7 @@ export class FirestoreDataService<T extends EntityBaseModel> implements EntityCo
 
 // FirestoreDataConfig Decorator
 export function FirestoreDataConfig(config: { collectionName: string }) {
-    return function <U extends EntityBaseModel, T extends { new(...args: any[]): FirestoreDataService<U> }>(target: T): T {
+    return function <U extends EntityBaseModel, T extends (new(...args: any[]) => FirestoreDataService<U>)>(target: T): T {
         Object.defineProperties(
             target.prototype, {
                 collection: {

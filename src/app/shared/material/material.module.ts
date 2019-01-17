@@ -2,20 +2,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { NgModule } from '@angular/core';
 import {
     MatButtonModule,
+    MatCardModule,
     MatCheckboxModule,
-    MatIconModule,
-    MatListModule,
-    MatPaginatorModule,
-    MatSidenavModule, MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule
-} from '@angular/material';
-
-const MATERIAL_MODULES = [
-    LayoutModule,
-    MatButtonModule,
-    MatCheckboxModule,
+    MatChipsModule,
     MatIconModule,
     MatListModule,
     MatPaginatorModule,
@@ -23,7 +12,23 @@ const MATERIAL_MODULES = [
     MatSortModule,
     MatTableModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+} from '@angular/material';
+
+const MATERIAL_MODULES = [
+    LayoutModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatIconModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatSidenavModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
 ];
 
 @NgModule({

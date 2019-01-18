@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    title = 'angular6-ngrx-mat-bootstrap-seed';
+    title = 'angular-ngrx-mat-bootstrap-seed';
     showFiller = true;
 
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

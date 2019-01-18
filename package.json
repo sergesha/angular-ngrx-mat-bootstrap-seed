@@ -1,6 +1,6 @@
 {
-  "name": "angular6-ngrx-mat-bootstrap-seed",
-  "version": "0.0.0",
+  "name": "angular-ngrx-mat-bootstrap-seed",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

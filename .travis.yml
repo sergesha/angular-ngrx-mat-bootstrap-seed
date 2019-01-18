@@ -33,12 +33,12 @@ script:
   # - xvfb-run npm run e2e
   - ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
   - ng e2e --protractor-config=./e2e/protractor-ci.conf.js
-  - ng build --prod --aot --base-href /angular6-ngrx-mat-bootstrap-seed/
+  - ng build --prod --aot --base-href /angular-ngrx-mat-bootstrap-seed/
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
-  local_dir: dist/angular6-ngrx-mat-bootstrap-seed
+  local_dir: dist/angular-ngrx-mat-bootstrap-seed
   on:
     branch: master

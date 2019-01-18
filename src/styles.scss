@@ -7,3 +7,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@for $i from 1 through 24 {
+    .mat-elevation-z#{$i} {
+        z-index: $i * 10;
+    }
+}

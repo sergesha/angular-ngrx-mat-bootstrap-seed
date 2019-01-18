@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
     declarations: [],
     imports: [
         SharedModule,
-        StoreModule.forFeature('featureOne', fromFeatureOne.reducer),
+        StoreModule.forFeature('FeatureOne', fromFeatureOne.reducer),
         EffectsModule.forFeature([FeatureOneEffects])
     ]
 })

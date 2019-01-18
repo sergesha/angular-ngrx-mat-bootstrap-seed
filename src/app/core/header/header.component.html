@@ -1,17 +1,23 @@
-<mat-toolbar color="primary">
-
-    <button
-            type="button"
+<mat-toolbar class="mat-elevation-z1 fixed-header" color="primary">
+    <button (click)="toggleLeftDrawer()"
+            *ngIf="leftDrawer && leftDrawer.toggle"
             aria-label="Toggle sidenav"
             mat-icon-button
-            (click)="toggleLeftDrawer()"
-            *ngIf="leftDrawer && leftDrawer.toggle">
+            type="button">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
     <span><ng-content></ng-content></span>
+    <!--Fill remaining space-->
     <span style="flex: 1 1 auto"></span>
-    <button mat-icon-button (click)="toggleRightDrawer()">
-        <mat-icon>more_vert</mat-icon>
+
+    <button mat-icon-button>
+        <mat-icon *ngIf="isAuth$ | async; else loggedOut" (click)="logout()">verified_user</mat-icon>
+        <ng-template #loggedOut>
+            <mat-icon (click)="login()">lock</mat-icon>
+        </ng-template>
     </button>
 
+    <button (click)="toggleRightDrawer()" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+    </button>
 </mat-toolbar>

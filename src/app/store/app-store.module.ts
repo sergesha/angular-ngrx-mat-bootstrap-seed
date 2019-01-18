@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { AppStoreService } from '@app/store/app-store.service';
 import { EntityStoreModule } from '@app/store/entity/entity-store.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -16,7 +17,8 @@ import { metaReducers, reducers } from './app.reducer';
         EntityStoreModule, // NgRx-data
         !environment.production ? StoreDevtoolsModule.instrument() : []
     ],
-    declarations: []
+    declarations: [],
+    providers: [AppStoreService]
 })
 export class AppStoreModule {
 }

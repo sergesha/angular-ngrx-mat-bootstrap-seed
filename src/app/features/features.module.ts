@@ -12,7 +12,7 @@ import { UsersComponent } from './users/users.component';
     imports: [
         SharedModule,
         FeatureOneModule,
-        StoreModule.forFeature('featureTwo', fromFeatureTwo.reducer),
+        StoreModule.forFeature('FeatureTwo', fromFeatureTwo.reducer),
         EffectsModule.forFeature([FeatureTwoEffects])
     ],
     declarations: [HomeComponent, UsersComponent],

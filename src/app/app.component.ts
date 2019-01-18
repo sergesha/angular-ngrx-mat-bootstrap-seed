@@ -1,12 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { FirebaseAuthService } from '@app/core/auth/services/firebase-auth.service';
-import { AuthState } from '@app/core/auth/store/auth-state.model';
-import * as fromAuth from '@app/core/auth/store/auth.actions';
-import { authSelectors } from '@app/core/auth/store/auth.selectors';
 import { FirestoreAdapterService } from '@app/core/services';
-import { AppState } from '@app/store/app.reducer';
-import { select, Store } from '@ngrx/store';
+import { AppStoreService } from '@app/store/app-store.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -26,34 +21,27 @@ export class AppComponent implements OnInit {
 
     items: Observable<any[]>;
     itemsWithIds: Observable<any[]>;
-    auth;
-    auth$: Observable<AuthState>;
-    user;
+    user$;
 
     constructor(private breakpointObserver: BreakpointObserver,
-                private authService: FirebaseAuthService,
                 private db: FirestoreAdapterService,
-                private store: Store<AppState>) {
+                private storeService: AppStoreService) {
     }
 
     ngOnInit() {
-        this.auth = this.authService;
         this.items = this.db.col$('users', ref => ref.where('displayName', '==', 'Serge S.'));
         this.items.subscribe(users => console.log('Users', users));
         this.itemsWithIds = this.db.colWithIds$('users');
         this.itemsWithIds.subscribe(users => console.log('WithIds', users));
 
-        this.auth$ = this.store.select('auth');
-        this.user = this.store.pipe(select(authSelectors.userInfo));
+        this.user$ = this.storeService.from('Auth').user$;
     }
 
     login() {
-        // this.auth.googleLogin();
-        this.store.dispatch(new fromAuth.GoogleLogin());
+        this.storeService.from('Auth').googleLogin();
     }
 
     logout() {
-        // this.auth.signOut();
-        this.store.dispatch(new fromAuth.Logout());
+        this.storeService.from('Auth').logout();
     }
 }

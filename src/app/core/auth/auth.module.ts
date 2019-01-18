@@ -27,7 +27,7 @@ import * as fromAuth from './store/auth.reducer';
         CommonModule,
         FormsModule,
         // AuthRoutingModule
-        StoreModule.forFeature('auth', fromAuth.reducer),
+        StoreModule.forFeature('Auth', fromAuth.reducer),
         EffectsModule.forFeature([AuthEffects])
     ],
     providers: [

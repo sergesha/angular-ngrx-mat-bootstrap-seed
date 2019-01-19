@@ -2,20 +2,20 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { FeatureTwo } from './feature-two.model';
 import { FeatureTwoActions, FeatureTwoActionTypes } from './feature-two.actions';
 
-export interface State extends EntityState<FeatureTwo> {
+export interface FeatureTwoState extends EntityState<FeatureTwo> {
   // additional entities state properties
 }
 
 export const adapter: EntityAdapter<FeatureTwo> = createEntityAdapter<FeatureTwo>();
 
-export const initialState: State = adapter.getInitialState({
+export const initialState: FeatureTwoState = adapter.getInitialState({
   // additional entity state properties
 });
 
 export function reducer(
   state = initialState,
   action: FeatureTwoActions
-): State {
+): FeatureTwoState {
   switch (action.type) {
     case FeatureTwoActionTypes.AddFeatureTwo: {
       return adapter.addOne(action.payload.featureTwo, state);

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppStoreService } from './app-store.service';
+import { AppStoreFacade } from './app-store.facade';
 
 describe('AppStoreService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AppStoreService = TestBed.get(AppStoreService);
+    const service: AppStoreFacade = TestBed.get(AppStoreFacade);
     expect(service).toBeTruthy();
   });
 });

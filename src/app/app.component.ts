@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FirestoreAdapterService } from '@app/core/services';
-import { AppStoreService } from '@app/store/app-store.service';
+import { AppStoreFacade } from '@app/store/app-store.facade';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
     constructor(private breakpointObserver: BreakpointObserver,
                 private db: FirestoreAdapterService,
-                private storeService: AppStoreService) {
+                private storeFacade: AppStoreFacade) {
     }
 
     ngOnInit() {
@@ -34,14 +34,14 @@ export class AppComponent implements OnInit {
         this.itemsWithIds = this.db.colWithIds$('users');
         this.itemsWithIds.subscribe(users => console.log('WithIds', users));
 
-        this.user$ = this.storeService.from('Auth').user$;
+        this.user$ = this.storeFacade.from('Auth').user$;
     }
 
     login() {
-        this.storeService.from('Auth').googleLogin();
+        this.storeFacade.from('Auth').googleLogin();
     }
 
     logout() {
-        this.storeService.from('Auth').logout();
+        this.storeFacade.from('Auth').logout();
     }
 }

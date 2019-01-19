@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppStoreService } from '@app/store/app-store.service';
+import { AppStoreFacade } from '@app/store/app-store.facade';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,19 +13,19 @@ export class HeaderComponent implements OnInit {
     @Input() rightDrawer;
     isAuth$: Observable<boolean>;
 
-    constructor(private storeService: AppStoreService) {
+    constructor(private storeFacade: AppStoreFacade) {
     }
 
     ngOnInit() {
-        this.isAuth$ = this.storeService.from('Auth').isAuth$;
+        this.isAuth$ = this.storeFacade.from('Auth').isAuth$;
     }
 
     login() {
-        this.storeService.from('Auth').googleLogin();
+        this.storeFacade.from('Auth').googleLogin();
     }
 
     logout() {
-        this.storeService.from('Auth').logout();
+        this.storeFacade.from('Auth').logout();
     }
 
     toggleLeftDrawer() {

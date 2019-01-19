@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FeatureOneModule } from '@app/features/feature-one/feature-one.module';
+import { FeatureTwoFacade } from '@app/features/feature-two/store/feature-two.facade';
 import { HomeComponent } from '@app/features/home/home.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
@@ -17,7 +18,7 @@ import { UsersComponent } from './users/users.component';
     ],
     declarations: [HomeComponent, UsersComponent],
     exports: [UsersComponent],
-    providers: []
+    providers: [FeatureTwoFacade]
 })
 export class FeaturesModule {
 }

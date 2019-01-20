@@ -31,8 +31,8 @@ script:
   # - npm run lint
   # - npm run test:headless
   # - xvfb-run npm run e2e
-  # - ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
-  # - ng e2e --protractor-config=./e2e/protractor-ci.conf.js
+  - ng test --watch=false --progress=false --browsers=ChromeHeadlessCI
+  - ng e2e --protractor-config=./e2e/protractor-ci.conf.js
   - ng build --prod --aot --base-href /angular-ngrx-mat-bootstrap-seed/
 
 deploy:

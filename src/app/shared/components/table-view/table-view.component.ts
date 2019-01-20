@@ -41,7 +41,9 @@ export class TableViewComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.pageSizeOptions = this.pageSizeOptions || [1, 2, 5, 10].map(a => a * this.pageSize);
         this.dataSource = new MatTableDataSource();
-        this.dataSource$.subscribe(data => this.dataSource.data = data);
+        if (this.dataSource$) {
+            this.dataSource$.subscribe(data => this.dataSource.data = data);
+        }
     }
 
     ngAfterViewInit() {

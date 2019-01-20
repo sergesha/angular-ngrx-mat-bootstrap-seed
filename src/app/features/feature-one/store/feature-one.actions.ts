@@ -74,7 +74,7 @@ export class ClearFeatureOnes implements Action {
 }
 
 export type FeatureOneActions =
- LoadFeatureOnes
+ | LoadFeatureOnes
  | AddFeatureOne
  | UpsertFeatureOne
  | AddFeatureOnes

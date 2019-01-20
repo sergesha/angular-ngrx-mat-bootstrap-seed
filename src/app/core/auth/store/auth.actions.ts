@@ -45,7 +45,7 @@ export class Logout implements Action {
 }
 
 export type AuthActions =
-    LoggedIn
+    | LoggedIn
     | LoggedOut
     | GoogleLogin
     | Logout
